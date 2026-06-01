@@ -121,8 +121,9 @@ Special thanks to **Anil Bajpai** & **ABTalksOnAI** for creating and leading the
 
 If you're also exploring AI, development, or public learning — let's connect.
 
-**LinkedIn:** *[linkedin.com/in/awesome-prachi-patel](http://wwww.linkedin.com/in/awesome-prachi-patel)]*
-**GitHub:** *[github.com/AwesomePrachi](http://wwww.github.com/AwesomePrachi)*
+**🔗 LinkedIn:** *[linkedin.com/in/awesome-prachi-patel](https://www.linkedin.com/in/awesome-prachi-patel)*
+
+**💻 GitHub:** *[github.com/AwesomePrachi](https://www.github.com/AwesomePrachi)*
 
 ---
 
