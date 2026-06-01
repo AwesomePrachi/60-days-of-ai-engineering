@@ -1,4 +1,4 @@
-# 🚀 60 Days of Claude AI Engineering
+# 🚀 60 Days of Claude AI Challenge
 
 <div align="center">
 
@@ -6,7 +6,6 @@
 
 ![Challenge](https://img.shields.io/badge/Challenge-60%20Days-orange?style=for-the-badge)
 ![AI](https://img.shields.io/badge/Focus-Claude%20AI-black?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-In%20Progress-success?style=for-the-badge)
 
 </div>
 
@@ -130,90 +129,3 @@ If you're also exploring AI, development, or public learning — let's connect.
 <div align="center">
 
 ### 🚀 Build Smarter • Learn Faster • Grow Together
-
-
-
-# 60 Days of AI Engineering 🚀
-
-Hi, I'm **Prachi Patel**.
-
-I'm a **Full-Stack Developer** passionate about **Artificial Intelligence, modern web development, and building practical software products**.
-
-This repository documents my **60-day AI challenge journey using Claude AI** — exploring prompting, AI workflows, experimentation, and AI-assisted development.
-
-## About Me
-
-* 💻 Full-Stack Developer
-* 🤖 AI Enthusiast & Builder
-* 🚀 Building projects, learning in public, and improving developer workflows
-* 📚 Focused on continuous learning, practical implementation, and portfolio growth
-
-## Goals For The Next 60 Days
-
-* Improve AI fluency & practical AI usage
-* Become a stronger AI-assisted developer
-* Master better prompting techniques
-* Explore AI workflows & productivity systems
-* Build a consistent public learning habit
-* Strengthen my GitHub & LinkedIn portfolio
-
-## Topics I'll Explore
-
-* Prompt Engineering
-* Claude AI Workflows
-* AI-Assisted Development
-* Automation & Productivity
-* Generative AI
-* AI Learning Experiments
-* Real-World AI Applications
-
-## Tech & Tools
-
-* Claude AI
-* ChatGPT
-* VS Code
-* GitHub
-* Full-Stack Development Tools
-
-## Daily Progress
-
-| Day   | Topic                                       | Status      |
-| ----- | ------------------------------------------- | ----------- |
-| Day 1 | AI Personality Profile + Cinematic Portrait | ✅ Completed |
-
----
-
-## Repository Structure
-
-```txt
-60-days-of-ai-engineering
-│
-├── README.md
-│
-├── Day-01
-│   ├── prompt.md
-│   ├── result.md
-│   └── screenshot.png
-│
-├── Day-02
-├── Day-03
-│
-└── Assets
-```
-
----
-
-## Connect With Me
-
-🔗 LinkedIn:
-[www.linkedin.com/in/awesome-prachi-patel](http://www.linkedin.com/in/awesome-prachi-patel)
-
-💻 GitHub:
-github.com/AwesomePrachi
-
----
-
-**Building in public. Learning continuously. Growing with AI. 🚀**
-
-
-</div>
