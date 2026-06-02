@@ -20,7 +20,7 @@ Create an image explaining Prompt Engineering
 
 The lazy prompt generated a detailed educational infographic with strong conceptual depth, prompt techniques, and explanation-focused design.
 
-![Lazy Prompt Output](./lazy-prompt.png)
+![Lazy Prompt Output](./lazy-prompt-output.png)
 
 ---
 
@@ -60,7 +60,7 @@ Section 3: Detailed Image Generation Prompt
 
 The engineered prompt produced a cleaner, more polished, LinkedIn-ready infographic aligned with the requested style, branding, audience, and formatting constraints.
 
-![Engineered Prompt Output](./engineered-prompt.png)
+![Engineered Prompt Output](./engineered-prompt-output.png)
 
 ---
 
