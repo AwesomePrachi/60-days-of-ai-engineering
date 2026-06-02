@@ -6,6 +6,7 @@
 
 ![Challenge](https://img.shields.io/badge/Challenge-60%20Days-orange?style=for-the-badge)
 ![AI](https://img.shields.io/badge/Focus-Claude%20AI-black?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-In%20Progress-success?style=for-the-badge)
 
 </div>
 
@@ -16,6 +17,8 @@
 Welcome to my **60-Day Claude AI Challenge Journey**.
 
 Over the next **60 days**, I'm committed to learning, experimenting, and building with **Claude AI** while documenting everything publicly on GitHub.
+
+I'm participating alongside **1000+ learners, developers, creators, and AI enthusiasts** exploring practical AI skills through this challenge.
 
 This repository will serve as my:
 
@@ -93,7 +96,7 @@ Throughout this challenge, I'll be exploring:
 | Day    | Topic                                       | Status      |
 | ------ | ------------------------------------------- | ----------- |
 | Day 01 | AI Personality Profile + Cinematic Portrait | ✅ Completed |
-| Day 02 | Coming Soon                                 | ⏳           |
+| Day 02 | Coming Soon                                 | ✅ Completed |
 | Day 03 | Coming Soon                                 | ⏳           |
 
 ---
