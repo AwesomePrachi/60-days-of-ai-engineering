@@ -224,13 +224,13 @@ As a Full-Stack Developer and AI Learner, I can use Role-Based Prompting to gain
 ## Screenshots
 
 * Output of prompt without role
-  (./prompt-without-role.jpg)
+  ![prompt-without-role.jpg](./prompt-without-role.jpg)
   
 * Founder persona response
-  (./founder-persona-response.jpg)
+  ![founder-persona-response.jpg](./founder-persona-response.jpg)
   
 * Senior Full-Stack Developer persona response
-  senior-full-stack-developer-persona-response.jpg)
+  ![senior-full-stack-developer-persona-response.jpg](senior-full-stack-developer-persona-response.jpg)
   
 * Claude Usage Counter extension
-  (./claude-usage-counter-extension.png)
+  ![claude-usage-counter-extension.png](./claude-usage-counter-extension.png)
