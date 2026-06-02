@@ -97,7 +97,10 @@ Throughout this challenge, I'll be exploring:
 | ------ | ------------------------------------------- | ----------- |
 | Day 01 | AI Personality Profile + Cinematic Portrait | ✅ Completed |
 | Day 02 | Coming Soon                                 | ✅ Completed |
-| Day 03 | Coming Soon                                 | ⏳           |
+| Day 03 | Coming Soon                                 | ✅ Completed |
+| Day 04 | Coming Soon                                 | ⏳           |
+| Day 05 | Coming Soon                                 | ⏳           |
+
 
 ---
 
