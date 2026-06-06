@@ -22,15 +22,15 @@ I asked Claude to generate a 30-day learning roadmap using only a simple instruc
 
 #### Screenshots
 
-![Week 1](/prompt-a-week1.jpg)
+![Week 1](./prompt-a-week1.jpg)
 
-![Week 2](/prompt-a-week2.jpg)
+![Week 2](./prompt-a-week2.jpg)
 
-![Week 3](/prompt-a-week3.jpg)
+![Week 3](./prompt-a-week3.jpg)
 
-![Week 4](/prompt-a-week4.jpg)
+![Week 4](./prompt-a-week4.jpg)
 
-![Outcome](/prompt-a-outcome.jpg)
+![Outcome](./prompt-a-outcome.jpg)
 
 ---
 
@@ -47,15 +47,15 @@ I provided additional information about:
 
 #### Screenshot
 
-![Week 1](/prompt-b-week1.png)
+![Week 1](./prompt-b-week1.png)
 
-![Week 2](/prompt-b-week2.png)
+![Week 2](./prompt-b-week2.png)
 
-![Week 3](/prompt-b-week3.png)
+![Week 3](./prompt-b-week3.png)
 
-![Week 4](/prompt-b-week4.png)
+![Week 4](./prompt-b-week4.png)
 
-![Outcome](/prompt-b-outcome.png)
+![Outcome](./prompt-b-outcome.png)
 
 ---
 
