@@ -1,0 +1,801 @@
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f5f6fa;
+    --surface: #ffffff;
+    --surface-alt: #f9fafb;
+    --border: #e5e7eb;
+    --border-light: #f0f1f5;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-muted: #9ca3af;
+    --accent: #6366f1;
+    --accent-light: #eef2ff;
+    --accent-dark: #4f46e5;
+    --red: #ef4444;
+    --red-light: #fef2f2;
+    --orange: #f97316;
+    --orange-light: #fff7ed;
+    --green: #22c55e;
+    --green-light: #f0fdf4;
+    --yellow: #eab308;
+    --yellow-light: #fefce8;
+    --blue: #3b82f6;
+    --blue-light: #eff6ff;
+    --purple: #8b5cf6;
+    --purple-light: #f5f3ff;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow: 0 4px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.05);
+    --shadow-md: 0 8px 24px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.05);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-xs: 5px;
+    --font: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #4338ca 100%);
+    color: #fff;
+    padding: 28px 32px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 30%;
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .header-inner { position: relative; z-index: 1; }
+  .header-top { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .mode-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+  }
+  .header h1 { font-size: 22px; font-weight: 700; margin-top: 10px; line-height: 1.3; }
+  .header-meta { display: flex; gap: 16px; margin-top: 8px; flex-wrap: wrap; }
+  .meta-item { display: flex; align-items: center; gap: 6px; font-size: 13px; opacity: 0.88; }
+  .meta-dot { width: 4px; height: 4px; background: rgba(255,255,255,0.6); border-radius: 50%; }
+  .attendees-row { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .attendee-chip {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 20px;
+    padding: 3px 10px 3px 6px;
+    font-size: 12px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .attendee-avatar {
+    width: 20px; height: 20px;
+    background: rgba(255,255,255,0.35);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700;
+  }
+
+  /* ── Main Layout ── */
+  .main { padding: 24px 32px 48px; max-width: 1200px; margin: 0 auto; }
+
+  /* ── Metric Cards ── */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .2s, transform .2s;
+    position: relative; overflow: hidden;
+  }
+  .metric-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .metric-card.c1::before { background: var(--accent); }
+  .metric-card.c2::before { background: var(--blue); }
+  .metric-card.c3::before { background: var(--red); }
+  .metric-card.c4::before { background: var(--green); }
+  .metric-icon { font-size: 22px; margin-bottom: 8px; }
+  .metric-val { font-size: 30px; font-weight: 700; letter-spacing: -0.8px; line-height: 1; }
+  .metric-label { font-size: 11px; color: var(--text-secondary); font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* ── Section Card ── */
+  .section-card {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: box-shadow .2s;
+  }
+  .section-card:hover { box-shadow: var(--shadow); }
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+    transition: background .15s;
+  }
+  .section-header:hover { background: var(--surface-alt); }
+  .section-header.open { border-bottom-color: var(--border-light); }
+  .section-title { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 0.6px; }
+  .section-icon { font-size: 12px; }
+  .section-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: var(--accent-light);
+    color: var(--accent-dark);
+  }
+  .chevron {
+    font-size: 11px;
+    color: var(--text-muted);
+    transition: transform .2s;
+  }
+  .chevron.open { transform: rotate(180deg); }
+  .section-body { padding: 20px; display: none; }
+  .section-body.open { display: block; }
+
+  /* ── Summary ── */
+  .summary-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    background: var(--surface-alt);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+    padding: 14px 16px;
+  }
+
+  /* ── Takeaway Cards ── */
+  .takeaways-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .takeaway-card {
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    background: var(--surface-alt);
+    transition: box-shadow .2s;
+  }
+  .takeaway-card:hover { box-shadow: var(--shadow-sm); }
+  .takeaway-who { font-size: 11px; font-weight: 600; color: var(--accent); margin-bottom: 5px; text-transform: uppercase; letter-spacing: .05em; }
+  .takeaway-text { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+  /* ── Decision ── */
+  .decision-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 14px 16px;
+    border: 1px solid #e0e7ff;
+    border-radius: var(--radius-sm);
+    background: var(--accent-light);
+    margin-bottom: 10px;
+  }
+  .decision-item:last-child { margin-bottom: 0; }
+  .decision-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .decision-text { font-size: 13.5px; color: var(--text-primary); line-height: 1.55; }
+
+  /* ── Action Table ── */
+  .table-wrap { overflow-x: auto; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { background: var(--surface-alt); }
+  th {
+    text-align: left;
+    padding: 11px 14px;
+    font-weight: 600;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: middle;
+  }
+  tr:last-child td { border-bottom: none; }
+  tbody tr { transition: background .12s; }
+  tbody tr:hover { background: var(--surface-alt); }
+  .owner-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--accent-light);
+    color: var(--accent-dark);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-weight: 600;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .owner-avatar {
+    width: 18px; height: 18px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; flex-shrink: 0;
+  }
+  .deadline-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: var(--yellow-light);
+    color: #92400e;
+    white-space: nowrap;
+  }
+  .deadline-ns {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 12px;
+  }
+  .status-badge, .priority-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .status-pending { background: #fef3c7; color: #92400e; }
+  .priority-ns { color: var(--text-muted); font-style: italic; font-size: 12px; }
+
+  /* ── Questions / Risks ── */
+  .list-items { display: flex; flex-direction: column; gap: 10px; }
+  .q-item {
+    display: flex; gap: 11px; align-items: flex-start;
+    padding: 13px 15px;
+    border: 1px solid #dbeafe;
+    border-radius: var(--radius-sm);
+    background: var(--blue-light);
+  }
+  .q-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .q-text { font-size: 13.5px; color: var(--text-primary); line-height: 1.5; }
+  .risk-item {
+    display: flex; gap: 11px; align-items: flex-start;
+    padding: 13px 15px;
+    border: 1px solid #fee2e2;
+    border-radius: var(--radius-sm);
+    background: var(--red-light);
+  }
+  .risk-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .risk-text { font-size: 13.5px; color: var(--text-primary); line-height: 1.5; }
+
+  /* ── Conflicts ── */
+  .conflict-item {
+    border: 1px solid #fed7aa;
+    border-radius: var(--radius-sm);
+    background: var(--orange-light);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .conflict-item:last-child { margin-bottom: 0; }
+  .conflict-header { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 13px; margin-bottom: 7px; }
+  .conflict-header .ctag { font-size: 14px; }
+  .conflict-parties { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+  .conflict-party {
+    font-size: 11.5px; font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: rgba(249,115,22,0.15);
+    color: #92400e;
+  }
+  .conflict-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+  .conflict-note {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--orange);
+    font-weight: 500;
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  /* ── Speaker Section ── */
+  .speakers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .speaker-card {
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .speaker-head {
+    padding: 12px 14px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .speaker-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px; color: #fff;
+    flex-shrink: 0;
+  }
+  .sa0 { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+  .sa1 { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+  .sa2 { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+  .sa3 { background: linear-gradient(135deg, #10b981, #059669); }
+  .speaker-name { font-weight: 700; font-size: 13.5px; }
+  .speaker-role { font-size: 11.5px; color: var(--text-muted); }
+  .speaker-body { padding: 12px 14px; background: var(--surface-alt); }
+  .speaker-body ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .speaker-body li {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    display: flex; align-items: flex-start; gap: 7px;
+    line-height: 1.5;
+  }
+  .speaker-body li::before { content: '•'; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .speaker-action-row { margin-top: 10px; }
+  .speaker-action-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin-bottom: 5px; }
+  .speaker-action-item {
+    font-size: 12px;
+    color: var(--text-secondary);
+    display: flex; align-items: flex-start; gap: 6px;
+    line-height: 1.5;
+    padding: 5px 0;
+    border-top: 1px solid var(--border-light);
+  }
+  .action-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+
+  /* ── Additional Notes ── */
+  .note-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-alt);
+  }
+  .note-icon { font-size: 16px; flex-shrink: 0; }
+  .note-text { font-size: 13.5px; color: var(--text-secondary); line-height: 1.55; }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .main { padding: 16px 14px 40px; }
+    .header { padding: 20px 18px 18px; }
+    .header h1 { font-size: 18px; }
+    .metrics { grid-template-columns: 1fr 1fr; }
+    .takeaways-grid { grid-template-columns: 1fr; }
+    .speakers-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .metrics { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .metric-val { font-size: 24px; }
+  }
+</style>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div>
+        <div class="mode-badge">Project No.521</div>
+        <h1>Product Strategy Discussion</h1>
+        <div class="header-meta">
+          <span class="meta-item">📅 June 18, 2026</span>
+          <span class="meta-dot"></span>
+          <span class="meta-item">🎯 AI Resume Analyzer</span>
+        </div>
+      </div>
+    </div>
+    <div class="attendees-row">
+      <div class="attendee-chip"><div class="attendee-avatar">A</div> Aisha · PM</div>
+      <div class="attendee-chip"><div class="attendee-avatar">R</div> Rohan · Engineering</div>
+      <div class="attendee-chip"><div class="attendee-avatar">N</div> Neha · UX</div>
+      <div class="attendee-chip"><div class="attendee-avatar">V</div> Vikram · Marketing</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<div class="main">
+
+  <!-- METRICS -->
+  <div class="metrics">
+    <div class="metric-card c1">
+      <div class="metric-icon">✅</div>
+      <div class="metric-val">4</div>
+      <div class="metric-label">Action Items</div>
+    </div>
+    <div class="metric-card c2">
+      <div class="metric-icon">❓</div>
+      <div class="metric-val">3</div>
+      <div class="metric-label">Open Questions</div>
+    </div>
+    <div class="metric-card c3">
+      <div class="metric-icon">⚠️</div>
+      <div class="metric-val">3</div>
+      <div class="metric-label">Risks / Blockers</div>
+    </div>
+    <div class="metric-card c4">
+      <div class="metric-icon">🎯</div>
+      <div class="metric-val">1</div>
+      <div class="metric-label">Decision Made</div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section-card">
+    <div class="section-header open" onclick="toggle(this)">
+      <div class="section-title">
+        <span class="section-icon">📋</span> Summary
+      </div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="summary-text">
+        The team reviewed progress on the AI Resume Analyzer project. Key discussion areas included a drop in user onboarding completion rates over the last two weeks, slower-than-expected API performance during peak traffic, and a disagreement around the timing of the planned July 15 marketing launch. A proposal was made to simplify onboarding from 7 screens to 3 screens; no final decision was reached. One formal decision was made: usability testing must be conducted before approving final onboarding changes.
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY TAKEAWAYS -->
+  <div class="section-card">
+    <div class="section-header open" onclick="toggle(this)">
+      <div class="section-title">
+        <span class="section-icon">💡</span> Key Takeaways
+        <span class="section-badge">6</span>
+      </div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="takeaways-grid">
+        <div class="takeaway-card">
+          <div class="takeaway-who">Aisha</div>
+          <div class="takeaway-text">User onboarding completion rates have dropped over the last two weeks. The current onboarding flow contains too many steps and may be causing user abandonment.</div>
+        </div>
+        <div class="takeaway-card">
+          <div class="takeaway-who">Neha</div>
+          <div class="takeaway-text">Proposed simplifying onboarding from 7 screens to 3 screens and introducing a progress indicator. No final decision was made.</div>
+        </div>
+        <div class="takeaway-card">
+          <div class="takeaway-who">Rohan</div>
+          <div class="takeaway-text">The recommendation engine API is currently running slower than expected during peak traffic. Backend optimization work has started but no completion date was provided.</div>
+        </div>
+        <div class="takeaway-card">
+          <div class="takeaway-who">Vikram</div>
+          <div class="takeaway-text">Wants the marketing launch campaign to begin on July 15.</div>
+        </div>
+        <div class="takeaway-card">
+          <div class="takeaway-who">Aisha</div>
+          <div class="takeaway-text">Believes the launch should only happen after onboarding improvements are implemented.</div>
+        </div>
+        <div class="takeaway-card">
+          <div class="takeaway-who">Rohan</div>
+          <div class="takeaway-text">Warned that performance testing has not yet been completed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DECISIONS -->
+  <div class="section-card">
+    <div class="section-header open" onclick="toggle(this)">
+      <div class="section-title">
+        <span class="section-icon">🔒</span> Decisions
+        <span class="section-badge">1</span>
+      </div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="decision-item">
+        <span class="decision-icon">✅</span>
+        <div class="decision-text">Conduct usability testing before approving final onboarding changes.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTION ITEMS -->
+  <div class="section-card">
+    <div class="section-header open" onclick="toggle(this)">
+      <div class="section-title">
+        <span class="section-icon">⚡</span> Action Items
+        <span class="section-badge">4</span>
+      </div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Task</th>
+              <th>Owner</th>
+              <th>Deadline</th>
+              <th>Status</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color:var(--text-muted);font-weight:600;">01</td>
+              <td>Create onboarding redesign prototypes</td>
+              <td><span class="owner-chip"><div class="owner-avatar">N</div> Neha</span></td>
+              <td><span class="deadline-pill">📅 June 25</span></td>
+              <td><span class="status-badge status-pending">⏳ Pending</span></td>
+              <td><span class="priority-ns">Not specified</span></td>
+            </tr>
+            <tr>
+              <td style="color:var(--text-muted);font-weight:600;">02</td>
+              <td>Prepare API performance metrics report</td>
+              <td><span class="owner-chip"><div class="owner-avatar">R</div> Rohan</span></td>
+              <td><span class="deadline-ns">Not specified</span></td>
+              <td><span class="status-badge status-pending">⏳ Pending</span></td>
+              <td><span class="priority-ns">Not specified</span></td>
+            </tr>
+            <tr>
+              <td style="color:var(--text-muted);font-weight:600;">03</td>
+              <td>Draft launch campaign assets</td>
+              <td><span class="owner-chip"><div class="owner-avatar">V</div> Vikram</span></td>
+              <td><span class="deadline-ns">Not specified</span></td>
+              <td><span class="status-badge status-pending">⏳ Pending</span></td>
+              <td><span class="priority-ns">Not specified</span></td>
+            </tr>
+            <tr>
+              <td style="color:var(--text-muted);font-weight:600;">04</td>
+              <td>Schedule usability testing sessions</td>
+              <td><span class="owner-chip"><div class="owner-avatar">A</div> Aisha</span></td>
+              <td><span class="deadline-ns">Not specified</span></td>
+              <td><span class="status-badge status-pending">⏳ Pending</span></td>
+              <td><span class="priority-ns">Not specified</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPEN QUESTIONS -->
+  <div class="section-card">
+    <div class="section-header open" onclick="toggle(this)">
+      <div class="section-title">
+        <span class="section-icon">❓</span> Open Questions
+        <span class="section-badge">3</span>
+      </div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="list-items">
+        <div class="q-item">
+          <span class="q-icon">❓</span>
+          <span class="q-text">Should onboarding be reduced to 3 screens or 4 screens?</span>
+        </div>
+        <div class="q-item">
+          <span class="q-icon">❓</span>
+          <span class="q-text">Can the recommendation engine handle launch traffic?</span>
+        </div>
+        <div class="q-item">
+          <span class="q-icon">❓</span>
+          <span class="q-text">Should the July 15 marketing campaign remain unchanged?</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RISKS / BLOCKERS -->
+  <div class="section-card">
+    <div class="section-header open" onclick="toggle(this)">
+      <div class="section-title">
+        <span class="section-icon">⚠️</span> Risks / Blockers
+        <span class="section-badge">3</span>
+      </div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="list-items">
+        <div class="risk-item">
+          <span class="risk-icon">🔴</span>
+          <span class="risk-text">Performance testing not completed.</span>
+        </div>
+        <div class="risk-item">
+          <span class="risk-icon">🔴</span>
+          <span class="risk-text">Potential user drop-off during onboarding.</span>
+        </div>
+        <div class="risk-item">
+          <span class="risk-icon">🔴</span>
+          <span class="risk-text">Launch timeline may conflict with engineering readiness.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFLICTS -->
+  <div class="section-card">
+    <div class="section-header open" onclick="toggle(this)">
+      <div class="section-title">
+        <span class="section-icon">⚡</span> Conflicts
+        <span class="section-badge">2</span>
+      </div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="conflict-item">
+        <div class="conflict-header">
+          <span class="ctag">⚠️</span> Conflicting Launch Readiness vs. Timeline
+        </div>
+        <div class="conflict-parties">
+          <span class="conflict-party">Vikram</span>
+          <span class="conflict-party">Aisha</span>
+          <span class="conflict-party">Rohan</span>
+        </div>
+        <div class="conflict-desc">
+          Vikram wants the marketing launch campaign to begin on July 15. Aisha believes the launch should only happen after onboarding improvements are implemented. Rohan warned that performance testing has not yet been completed. All three positions are unresolved.
+        </div>
+        <div class="conflict-note">⚠️ Not resolved — no final decision made</div>
+      </div>
+      <div class="conflict-item">
+        <div class="conflict-header">
+          <span class="ctag">⚠️</span> Conflicting Onboarding Screen Count
+        </div>
+        <div class="conflict-parties">
+          <span class="conflict-party">Neha (proposal)</span>
+          <span class="conflict-party">Open Question</span>
+        </div>
+        <div class="conflict-desc">
+          Neha proposed simplifying onboarding to 3 screens, but the open questions section raises whether the final number should be 3 or 4 screens. No final decision was made.
+        </div>
+        <div class="conflict-note">⚠️ Not resolved — no final decision made</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPEAKER SUMMARY -->
+  <div class="section-card">
+    <div class="section-header open" onclick="toggle(this)">
+      <div class="section-title">
+        <span class="section-icon">🎙</span> Speaker Summary
+        <span class="section-badge">4</span>
+      </div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="speakers-grid">
+        <!-- Aisha -->
+        <div class="speaker-card">
+          <div class="speaker-head">
+            <div class="speaker-avatar sa0">A</div>
+            <div>
+              <div class="speaker-name">Aisha</div>
+              <div class="speaker-role">Product Manager</div>
+            </div>
+          </div>
+          <div class="speaker-body">
+            <ul>
+              <li>Flagged that user onboarding completion rates have dropped over the last two weeks</li>
+              <li>Noted the current onboarding flow contains too many steps and may be causing abandonment</li>
+              <li>Believes the launch should only happen after onboarding improvements are implemented</li>
+            </ul>
+            <div class="speaker-action-row">
+              <div class="speaker-action-label">Action Item</div>
+              <div class="speaker-action-item"><div class="action-dot"></div>Schedule usability testing sessions</div>
+            </div>
+          </div>
+        </div>
+        <!-- Rohan -->
+        <div class="speaker-card">
+          <div class="speaker-head">
+            <div class="speaker-avatar sa1">R</div>
+            <div>
+              <div class="speaker-name">Rohan</div>
+              <div class="speaker-role">Engineering Lead</div>
+            </div>
+          </div>
+          <div class="speaker-body">
+            <ul>
+              <li>Stated the recommendation engine API is running slower than expected during peak traffic</li>
+              <li>Confirmed backend optimization work has started; no completion date provided</li>
+              <li>Warned that performance testing has not yet been completed</li>
+            </ul>
+            <div class="speaker-action-row">
+              <div class="speaker-action-label">Action Item</div>
+              <div class="speaker-action-item"><div class="action-dot"></div>Prepare API performance metrics report</div>
+            </div>
+          </div>
+        </div>
+        <!-- Neha -->
+        <div class="speaker-card">
+          <div class="speaker-head">
+            <div class="speaker-avatar sa2">N</div>
+            <div>
+              <div class="speaker-name">Neha</div>
+              <div class="speaker-role">UX Designer</div>
+            </div>
+          </div>
+          <div class="speaker-body">
+            <ul>
+              <li>Proposed simplifying onboarding from 7 screens to 3 screens</li>
+              <li>Proposed introducing a progress indicator in the onboarding flow</li>
+              <li>No final decision was made on the proposal</li>
+            </ul>
+            <div class="speaker-action-row">
+              <div class="speaker-action-label">Action Item</div>
+              <div class="speaker-action-item"><div class="action-dot"></div>Create onboarding redesign prototypes — by June 25</div>
+            </div>
+          </div>
+        </div>
+        <!-- Vikram -->
+        <div class="speaker-card">
+          <div class="speaker-head">
+            <div class="speaker-avatar sa3">V</div>
+            <div>
+              <div class="speaker-name">Vikram</div>
+              <div class="speaker-role">Marketing Lead</div>
+            </div>
+          </div>
+          <div class="speaker-body">
+            <ul>
+              <li>Wants the marketing launch campaign to begin on July 15</li>
+            </ul>
+            <div class="speaker-action-row">
+              <div class="speaker-action-label">Action Item</div>
+              <div class="speaker-action-item"><div class="action-dot"></div>Draft launch campaign assets</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADDITIONAL NOTES -->
+  <div class="section-card">
+    <div class="section-header open" onclick="toggle(this)">
+      <div class="section-title">
+        <span class="section-icon">📝</span> Additional Notes
+        <span class="section-badge">1</span>
+      </div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="note-item">
+        <span class="note-icon">💰</span>
+        <span class="note-text">Budget approval for paid advertising is still pending.</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const chevron = header.querySelector('.chevron');
+    chevron.classList.toggle('open');
+    const body = header.nextElementSibling;
+    body.classList.toggle('open');
+  }
+</script>
+  
