@@ -1,0 +1,643 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F4F5F9;
+  --card-bg: #FFFFFF;
+  --border: #E7E8EF;
+  --text-primary: #14161F;
+  --text-secondary: #5C5F6E;
+  --text-tertiary: #9396A3;
+
+  --blue: #4F46E5;
+  --blue-light: #EEF0FD;
+  --green: #059669;
+  --green-light: #E9F8F1;
+  --orange: #EA580C;
+  --orange-light: #FFF1E8;
+  --red: #DC2626;
+  --red-light: #FDECEC;
+  --purple: #7C3AED;
+  --purple-light: #F3EEFD;
+
+  --shadow-sm: 0 1px 2px rgba(20,22,31,0.05);
+  --shadow-md: 0 6px 16px rgba(20,22,31,0.07);
+  --shadow-lg: 0 16px 40px rgba(20,22,31,0.10);
+  --radius: 14px;
+}
+
+.dashboard {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100%;
+  padding-bottom: 48px;
+}
+
+h1, h2, h3 { font-family: 'Manrope', 'Inter', sans-serif; }
+
+/* ---------- HERO ---------- */
+.hero {
+  width: 100%;
+  min-height: 190px;
+  background: linear-gradient(135deg, #181B3A 0%, #3730A3 55%, #6D28D9 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 28px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 70%);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -90px; left: 18%;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+}
+.hero-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; position: relative; z-index: 1; }
+.badge-glass {
+  background: rgba(255,255,255,0.14);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+.hero-title {
+  color: #fff;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  position: relative;
+  z-index: 1;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  position: relative;
+  z-index: 1;
+}
+.hero-meta-item {
+  color: rgba(255,255,255,0.85);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hero-meta-label { color: rgba(255,255,255,0.55); font-weight: 500; }
+.participant-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.participant-pill {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+/* ---------- BODY ---------- */
+.dashboard-body { max-width: 1180px; margin: 0 auto; padding: 28px 24px 0; }
+
+/* ---------- KPI METRICS ---------- */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+.kpi-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent, var(--blue));
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.kpi-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.kpi-label { font-size: 12.5px; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 8px; }
+.kpi-value { font-size: 30px; font-weight: 800; color: var(--text-primary); font-family: 'Manrope', sans-serif; }
+.kpi-card.action { --accent: var(--blue); }
+.kpi-card.question { --accent: var(--purple); }
+.kpi-card.risk { --accent: var(--orange); }
+.kpi-card.decision { --accent: var(--green); }
+
+/* ---------- SECTION SHELL ---------- */
+.section {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  cursor: pointer;
+  user-select: none;
+}
+.section-header:hover { background: #FAFAFC; }
+.section-title-wrap { display: flex; align-items: center; gap: 10px; }
+.section-icon-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); }
+.section-title { font-size: 15.5px; font-weight: 700; letter-spacing: -0.01em; }
+.section-count {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: #F1F2F6;
+  padding: 2px 9px;
+  border-radius: 999px;
+}
+.chevron { transition: transform 0.2s ease; color: var(--text-tertiary); font-size: 13px; }
+.section.collapsed .chevron { transform: rotate(-90deg); }
+.section-content {
+  padding: 4px 22px 20px;
+  border-top: 1px solid var(--border);
+}
+.section.collapsed .section-content { display: none; }
+.section.collapsed .section-header { border-bottom: none; }
+
+/* color accents per section type */
+.section.decisions .section-icon-dot { background: var(--green); }
+.section.risks .section-icon-dot { background: var(--orange); }
+.section.questions .section-icon-dot { background: var(--purple); }
+.section.conflicts .section-icon-dot { background: var(--red); }
+
+/* ---------- SUMMARY ---------- */
+.summary-card {
+  border-left: 4px solid var(--blue);
+  background: var(--blue-light);
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text-primary);
+  margin-top: 14px;
+}
+
+/* ---------- KEY TAKEAWAYS ---------- */
+.takeaways-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+.takeaway-card {
+  border-left: 3px solid var(--blue);
+  background: #FAFAFD;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.takeaway-card .speaker-tag {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+
+/* ---------- DECISIONS ---------- */
+.decision-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  border-left: 4px solid var(--green);
+  background: var(--green-light);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #064E3B;
+}
+
+/* ---------- TABLE ---------- */
+.table-wrap { margin-top: 14px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+thead th {
+  text-align: left;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-secondary);
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--border);
+  cursor: pointer;
+  white-space: nowrap;
+}
+thead th:hover { color: var(--blue); }
+tbody td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tbody tr { transition: background 0.15s ease; }
+tbody tr:hover { background: #FAFAFC; }
+.task-cell { font-weight: 600; }
+.pill { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; display: inline-block; white-space: nowrap; }
+.pill-pending { background: #FFF4DE; color: #92400E; }
+.pill-completed { background: var(--green-light); color: var(--green); }
+.muted { color: var(--text-tertiary); }
+
+/* ---------- OPEN QUESTIONS ---------- */
+.question-item {
+  display: flex;
+  gap: 10px;
+  border-left: 4px solid var(--purple);
+  background: var(--purple-light);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4C1D95;
+}
+
+/* ---------- RISKS ---------- */
+.risk-item {
+  border-left: 4px solid var(--orange);
+  background: var(--orange-light);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 12px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #7C2D12;
+}
+.risk-item .speaker-tag { display: block; font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase; margin-bottom: 4px; }
+
+/* ---------- CONFLICTS ---------- */
+.conflict-item {
+  border-left: 4px solid var(--red);
+  background: var(--red-light);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-top: 14px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #7F1D1D;
+}
+.conflict-item .conflict-label {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 700;
+  background: var(--red);
+  color: #fff;
+  padding: 2px 9px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+.conflict-item ul { margin: 8px 0 0 18px; }
+.conflict-item li { margin-bottom: 4px; }
+
+/* ---------- SPEAKER SUMMARY ---------- */
+.speaker-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 14px; }
+.speaker-card {
+  background: #FAFAFD;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.speaker-name {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.speaker-avatar {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.speaker-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+/* ---------- BY-SPEAKER LISTS ---------- */
+.bylist { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+.bylist-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: #FAFAFD;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+}
+.bylist-owner { font-weight: 700; min-width: 80px; color: var(--blue); }
+
+/* ---------- ADDITIONAL NOTES ---------- */
+.note-line { font-size: 13.5px; color: var(--text-secondary); margin-top: 12px; line-height: 1.6; }
+
+@media (max-width: 760px) {
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .takeaways-grid { grid-template-columns: 1fr; }
+  .speaker-grid { grid-template-columns: 1fr; }
+  .hero { padding: 24px 20px; }
+  .hero-title { font-size: 21px; }
+}
+</style>
+
+<div class="dashboard">
+
+  <section class="hero">
+    <div class="hero-top">
+      <span class="badge-glass">🗂️ Transcript Mode</span>
+      <span class="badge-glass">4 Participants</span>
+    </div>
+    <div class="hero-title">Onboarding &amp; Launch Readiness Discussion</div>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="hero-meta-label">Date:</span> Not specified</div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Participants:</span></div>
+      <div class="participant-pills">
+        <span class="participant-pill">Aisha</span>
+        <span class="participant-pill">Rohan</span>
+        <span class="participant-pill">Neha</span>
+        <span class="participant-pill">Vikram</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="dashboard-body">
+
+    <!-- KPI METRICS -->
+    <div class="metrics-grid">
+      <div class="kpi-card action">
+        <div class="kpi-label">Total Action Items</div>
+        <div class="kpi-value">2</div>
+      </div>
+      <div class="kpi-card question">
+        <div class="kpi-label">Open Questions</div>
+        <div class="kpi-value">1</div>
+      </div>
+      <div class="kpi-card risk">
+        <div class="kpi-label">Risks / Blockers</div>
+        <div class="kpi-value">4</div>
+      </div>
+      <div class="kpi-card decision">
+        <div class="kpi-label">Decisions Identified</div>
+        <div class="kpi-value">1</div>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <section class="section" id="sec-summary">
+      <div class="section-header" onclick="toggleSection('sec-summary')">
+        <div class="section-title-wrap"><span class="section-icon-dot"></span><span class="section-title">Summary</span></div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="section-content">
+        <div class="summary-card">
+          Aisha reported that user onboarding completion fell from 72% to 54% this month and raised concern about launching before onboarding is improved. Rohan reported increased backend response times during peak traffic and noted performance testing is still incomplete. Neha recommended reducing onboarding from 7 screens to 3 screens and committed to redesigned prototypes by June 25. Vikram reported that Marketing is planning a launch campaign on July 15 and will start creating campaign assets. The team decided usability testing must be completed before launch approval, and an open question remains on whether the product can support projected launch traffic.
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY TAKEAWAYS -->
+    <section class="section" id="sec-takeaways">
+      <div class="section-header" onclick="toggleSection('sec-takeaways')">
+        <div class="section-title-wrap"><span class="section-icon-dot"></span><span class="section-title">Key Takeaways</span></div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="section-content">
+        <div class="takeaways-grid">
+          <div class="takeaway-card"><span class="speaker-tag">Aisha</span>User onboarding completion has fallen from 72% to 54% this month.</div>
+          <div class="takeaway-card"><span class="speaker-tag">Rohan</span>Backend response times have increased during peak traffic.</div>
+          <div class="takeaway-card"><span class="speaker-tag">Neha</span>Recommendation to reduce onboarding from 7 screens to 3 screens.</div>
+          <div class="takeaway-card"><span class="speaker-tag">Vikram</span>Marketing is planning a launch campaign on July 15.</div>
+          <div class="takeaway-card"><span class="speaker-tag">Rohan</span>Performance testing is still incomplete.</div>
+          <div class="takeaway-card"><span class="speaker-tag">Decision</span>Usability testing must be completed before launch approval.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DECISIONS -->
+    <section class="section decisions" id="sec-decisions">
+      <div class="section-header" onclick="toggleSection('sec-decisions')">
+        <div class="section-title-wrap"><span class="section-icon-dot"></span><span class="section-title">Decisions</span></div>
+        <span class="section-count">1</span>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="section-content">
+        <div class="decision-item">✅ Usability testing must be completed before launch approval.</div>
+      </div>
+    </section>
+
+    <!-- ACTION ITEMS -->
+    <section class="section" id="sec-actions">
+      <div class="section-header" onclick="toggleSection('sec-actions')">
+        <div class="section-title-wrap"><span class="section-icon-dot"></span><span class="section-title">Action Items</span></div>
+        <span class="section-count">2</span>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="section-content">
+        <div class="table-wrap">
+          <table id="actionTable">
+            <thead>
+              <tr>
+                <th onclick="sortTable(0)">Task</th>
+                <th onclick="sortTable(1)">Owner</th>
+                <th onclick="sortTable(2)">Deadline</th>
+                <th onclick="sortTable(3)">Status</th>
+                <th onclick="sortTable(4)">Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="task-cell">Prepare redesigned onboarding prototypes</td>
+                <td>Neha</td>
+                <td>June 25</td>
+                <td><span class="pill pill-pending">⏳ Pending</span></td>
+                <td class="muted">Not specified</td>
+              </tr>
+              <tr>
+                <td class="task-cell">Start creating campaign assets</td>
+                <td>Vikram</td>
+                <td class="muted">Not specified</td>
+                <td><span class="pill pill-pending">⏳ Pending</span></td>
+                <td class="muted">Not specified</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- OPEN QUESTIONS -->
+    <section class="section questions" id="sec-questions">
+      <div class="section-header" onclick="toggleSection('sec-questions')">
+        <div class="section-title-wrap"><span class="section-icon-dot"></span><span class="section-title">Open Questions</span></div>
+        <span class="section-count">1</span>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="section-content">
+        <div class="question-item">❓ Can the product support projected launch traffic?</div>
+      </div>
+    </section>
+
+    <!-- RISKS / BLOCKERS -->
+    <section class="section risks" id="sec-risks">
+      <div class="section-header" onclick="toggleSection('sec-risks')">
+        <div class="section-title-wrap"><span class="section-icon-dot"></span><span class="section-title">Risks / Blockers</span></div>
+        <span class="section-count">4</span>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="section-content">
+        <div class="risk-item"><span class="speaker-tag">Aisha</span>User onboarding completion has fallen from 72% to 54% this month.</div>
+        <div class="risk-item"><span class="speaker-tag">Rohan</span>Backend response times have increased during peak traffic.</div>
+        <div class="risk-item"><span class="speaker-tag">Rohan</span>Performance testing is still incomplete.</div>
+        <div class="risk-item"><span class="speaker-tag">Aisha</span>I don't think we should launch before improving onboarding.</div>
+      </div>
+    </section>
+
+    <!-- CONFLICTS -->
+    <section class="section conflicts" id="sec-conflicts">
+      <div class="section-header" onclick="toggleSection('sec-conflicts')">
+        <div class="section-title-wrap"><span class="section-icon-dot"></span><span class="section-title">Conflicts</span></div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="section-content">
+        <div class="conflict-item">
+          <span class="conflict-label">⚠️ Conflict</span><br/>
+          Vikram states Marketing is planning a launch campaign on July 15 and will start creating campaign assets, while other statements in the notes raise unresolved launch-readiness concerns:
+          <ul>
+            <li>Aisha: "I don't think we should launch before improving onboarding."</li>
+            <li>Decision: "Usability testing must be completed before launch approval."</li>
+            <li>Rohan: "Performance testing is still incomplete."</li>
+            <li>Open Question: "Can the product support projected launch traffic?"</li>
+          </ul>
+          This conflict is presented as stated in the notes and has not been resolved.
+        </div>
+      </div>
+    </section>
+
+    <!-- SPEAKER SUMMARY -->
+    <section class="section" id="sec-speakers">
+      <div class="section-header" onclick="toggleSection('sec-speakers')">
+        <div class="section-title-wrap"><span class="section-icon-dot"></span><span class="section-title">Speaker Summary</span></div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="section-content">
+        <div class="speaker-grid">
+          <div class="speaker-card">
+            <div class="speaker-name"><span class="speaker-avatar">A</span>Aisha</div>
+            <p>Reported onboarding completion dropped from 72% to 54% this month. Stated she does not think the team should launch before improving onboarding.</p>
+          </div>
+          <div class="speaker-card">
+            <div class="speaker-name"><span class="speaker-avatar">R</span>Rohan</div>
+            <p>Reported backend response times have increased during peak traffic. Noted that performance testing is still incomplete.</p>
+          </div>
+          <div class="speaker-card">
+            <div class="speaker-name"><span class="speaker-avatar">N</span>Neha</div>
+            <p>Recommended reducing onboarding from 7 screens to 3 screens. Committed to preparing redesigned onboarding prototypes by June 25.</p>
+          </div>
+          <div class="speaker-card">
+            <div class="speaker-name"><span class="speaker-avatar">V</span>Vikram</div>
+            <p>Reported Marketing is planning a launch campaign on July 15. Committed to starting creation of campaign assets.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DECISIONS BY SPEAKER -->
+    <section class="section decisions" id="sec-dec-speaker">
+      <div class="section-header" onclick="toggleSection('sec-dec-speaker')">
+        <div class="section-title-wrap"><span class="section-icon-dot"></span><span class="section-title">Decisions by Speaker</span></div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="section-content">
+        <div class="bylist">
+          <div class="bylist-row"><span class="bylist-owner muted">Attribution unclear</span><span>Usability testing must be completed before launch approval.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTION ITEMS BY SPEAKER -->
+    <section class="section" id="sec-act-speaker">
+      <div class="section-header" onclick="toggleSection('sec-act-speaker')">
+        <div class="section-title-wrap"><span class="section-icon-dot"></span><span class="section-title">Action Items by Speaker</span></div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="section-content">
+        <div class="bylist">
+          <div class="bylist-row"><span class="bylist-owner">Neha</span><span>Prepare redesigned onboarding prototypes — Deadline: June 25</span></div>
+          <div class="bylist-row"><span class="bylist-owner">Vikram</span><span>Start creating campaign assets — Deadline: Not specified</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ATTRIBUTION NOTES -->
+    <section class="section" id="sec-attribution">
+      <div class="section-header" onclick="toggleSection('sec-attribution')">
+        <div class="section-title-wrap"><span class="section-icon-dot"></span><span class="section-title">Attribution Notes</span></div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="section-content">
+        <p class="note-line">The Decision ("Usability testing must be completed before launch approval.") and the Open Question ("Can the product support projected launch traffic?") were not attributed to a specific speaker in the notes. Attribution unclear.</p>
+      </div>
+    </section>
+
+    <!-- ADDITIONAL NOTES -->
+    <section class="section" id="sec-additional">
+      <div class="section-header" onclick="toggleSection('sec-additional')">
+        <div class="section-title-wrap"><span class="section-icon-dot"></span><span class="section-title">Additional Notes</span></div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="section-content">
+        <p class="note-line">No additional context was provided beyond the items captured above.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+function toggleSection(id) {
+  var el = document.getElementById(id);
+  if (el) { el.classList.toggle('collapsed'); }
+}
+
+function sortTable(colIndex) {
+  var table = document.getElementById('actionTable');
+  var tbody = table.tBodies[0];
+  var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+  var dir = table.getAttribute('data-sort-dir-' + colIndex) === 'asc' ? 'desc' : 'asc';
+
+  rows.sort(function(a, b) {
+    var aText = a.cells[colIndex].innerText.trim().toLowerCase();
+    var bText = b.cells[colIndex].innerText.trim().toLowerCase();
+    if (aText < bText) return dir === 'asc' ? -1 : 1;
+    if (aText > bText) return dir === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  rows.forEach(function(row) { tbody.appendChild(row); });
+  table.setAttribute('data-sort-dir-' + colIndex, dir);
+}
+</script>
